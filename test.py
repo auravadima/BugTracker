@@ -1,6 +1,6 @@
 from unittest import TestCase
-from app import db
-from app import User, Comment, Task, TaskType, WorkLog
+from bugtracker import db
+from bugtracker import User, Comment, Task, TaskType, WorkLog
 from datetime import datetime
 
 class UserTests(TestCase):
