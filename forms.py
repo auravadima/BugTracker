@@ -10,3 +10,4 @@ class LoginForm(FlaskForm):
 	email = StringField("Email", validators=[DataRequired(), Email()])
 	password = PasswordField("Password", validators=[DataRequired(), Length(min=7)])
 	confirm_password = PasswordField("Confirm password", validators=[DataRequired(), EqualTo('password')])
+	submit = SubmitField("Log in")

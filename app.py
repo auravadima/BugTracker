@@ -1,6 +1,6 @@
 from flask import Flask, render_template, flash, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
-from forms import SampleForm
+from forms import LoginForm
 from datetime import datetime
 
 app = Flask(__name__)
@@ -57,18 +57,18 @@ class TaskType(db.Model):
 
 @app.route("/")
 def index():
-	return render_template('home.html')
+	return render_template('dashboard.html', title='Dashboard')
 
-@app.route('/form', methods=["POST", "GET"])
+@app.route('/login', methods=["POST", "GET"])
 def form():
-	form = SampleForm()
+	form = LoginForm()
 	if form.validate_on_submit():
 		if form.field.data == "admin":
 			flash("You are admin", category="success")
 		else:
 			flash("Go out", category="danger")
 		return redirect(url_for('index'))
-	return render_template('form.html', form=form)
+	return render_template('login.html', form=form)
 
 
 if __name__ == '__main__':
