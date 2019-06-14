@@ -8,11 +8,16 @@
 		<title>{{ title }}</title>
 		<link href="{{ url_for('static', filename='bootstrap.min.css') }}" rel="stylesheet">
 		<link href="{{ url_for('static', filename='main.css') }}" rel="stylesheet">
+		{% block styles %} {% endblock %}
 	</head>
 	<body class='bg-dark text-white'>
 		<!-- NavBar -->
 		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-			<a class="navbar-brand" href="#">Some Icon</a>
+			{% if current_user.is_authenticated %}
+				<a class='m-0 text-center' href="{{ url_for('dashboard') }}">
+					<img src="{{ url_for('static', filename='leaf-icon.png') }}">
+				</a>
+			{% endif %}
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
 			aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
@@ -21,9 +26,6 @@
 				<ul class="navbar-nav mr-auto">
 					<li class="nav-item active">
 						<a class="nav-link" href="{{ url_for('dashboard') }}">Dashboard</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="#">My Projects</a>
 					</li>
 					<li class="nav-item dropdown">
 						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
@@ -38,13 +40,29 @@
 						</div>
 					</li>
 				</ul>
-				<!-- <form class="form-inline my-2 my-lg-0">
-														<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-														<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-				</form> -->
 				<div>
-					<button type='button' class='btn btn-outline-light'>Login</button>
-					<button type='button' class='btn btn-outline-light'>Register</button>
+					{% if current_user.is_authenticated %}
+						<div>
+							<div id="messages">
+								
+							</div>
+							<div class="nav-item dropdown">
+								<a class="nav-link dropdown-toggle text-light" href="#" id="user-dropdown" role="button"
+									data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									{{ current_user.username }}
+								</a>
+								<div class="dropdown-menu" aria-labelledby="user-dropdown">
+									<a class="dropdown-item" href="#">Account</a>
+									<a class="dropdown-item" href="{{ url_for('projects') }}">Projects</a>
+									<div class="dropdown-divider"></div>
+									<a class="dropdown-item" href="{{ url_for('logout') }}">Logout</a>
+								</div>
+							</div>
+						</div>
+					{% else %}
+						<a href="{{ url_for('login') }}" type="button" class="btn btn-outline-light">Login</a>
+						<a href="{{ url_for('register') }}" type="button" class="btn btn-outline-light">Register</a>
+					{% endif %}
 				</div>
 			</div>
 		</nav>

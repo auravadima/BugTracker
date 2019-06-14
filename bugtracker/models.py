@@ -18,11 +18,19 @@ class User(db.Model, UserMixin):
 	def __repr__(self):
 		return f'User({self.id} {self.username} {self.image} {self.password})'
 
+class Project(db.Model):
+	id = db.Column(db.Integer, primary_key=True)
+	project_name = db.Column(db.String(100), unique=True, nullable=False)
+	description = db.Column(db.Text, nullable=False)
+	tasks = db.relationship('Task', backref='project', lazy=True)
+
 class Comment(db.Model):
 	id = db.Column(db.Integer, primary_key=True)
 	content = db.Column(db.Text, nullable=False)
 	date = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
 	user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+	task_id = db.Column(db.Integer, db.ForeignKey('task.id'), nullable=False)
+
 
 	def __repr__(self):
 		return f'Comment({self.id} {self.date} {self.user_id})'
@@ -32,6 +40,7 @@ class WorkLog(db.Model):
 	content = db.Column(db.Text, nullable=False)
 	date = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
 	user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+	task_id = db.Column(db.Integer, db.ForeignKey('task.id'), nullable=False)
 
 	def __repr__(self):
 		return f'Comment({self.id} {self.date} {self.user_id})'
@@ -40,7 +49,10 @@ class Task(db.Model):
 	id = db.Column(db.Integer, primary_key=True)
 	title = db.Column(db.String(100), nullable=False)
 	content = db.Column(db.Text, nullable=False)
+	comments = db.relationship('Comment', backref='task', lazy=True)
+	worklogs = db.relationship('WorkLog', backref='task', lazy=True)
 	user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+	project_id = db.Column(db.Integer, db.ForeignKey('project.id'))
 	type_id = db.Column(db.Integer, db.ForeignKey('task_type.id'), nullable=False)
 
 	def __repr__(self):
