@@ -32,6 +32,11 @@ def dashboard():
 def projects():
 	return render_template('projects.html', title='Projects')
 
+@app.route("/project")
+@authorize
+def project():
+	return render_template('projectinfo.html', title='Project')
+
 @app.route('/login', methods=["POST", "GET"])
 def login():
 	form = LoginForm()

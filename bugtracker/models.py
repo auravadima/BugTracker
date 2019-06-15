@@ -20,7 +20,7 @@ class User(db.Model, UserMixin):
 
 class Project(db.Model):
 	id = db.Column(db.Integer, primary_key=True)
-	project_name = db.Column(db.String(100), unique=True, nullable=False)
+	title = db.Column(db.String(100), unique=True, nullable=False)
 	description = db.Column(db.Text, nullable=False)
 	tasks = db.relationship('Task', backref='project', lazy=True)
 

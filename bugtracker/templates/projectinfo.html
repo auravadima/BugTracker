@@ -1,0 +1,59 @@
+{% extends 'layout.html' %}
+{% block content %}
+	<!-- ProjectInfo -->
+	<div class="row">
+		<div class="col-md-8">
+			<div class="card text-center bg-secondary">
+				<div class="card-header">
+					Project
+				</div>
+				<div class="card-body">
+					<h5 class="card-title">Project name</h5>
+					<p class="card-text">Project description</p>
+				</div>
+				<div class="card-footer text-light">
+					2 days ago
+				</div>
+			</div>
+		</div>
+		<div class="col-md-4">
+			<ul class="list-group">
+				<li class="list-group-item list-group-item-dark">User1</li>
+				<li class="list-group-item list-group-item-dark">User2</li>
+				<li class="list-group-item list-group-item-dark">User3</li>
+				<li class="list-group-item list-group-item-dark">User4</li>
+				<li class="list-group-item list-group-item-dark">User5</li>
+			</ul>
+		</div>
+	</div>
+	<!-- EndProjectInfo -->
+	<!-- ProjectTasks -->
+	<!-- Type -->
+	<div class="card bg-dark text-center border-0 ml-0 mr-0">
+		<div class="card_body mt-2">
+			<div class="card-header bg-secondary">
+				Type
+			</div>
+			<!-- Task -->
+			<div class="card bg-dark border-secondary text-center mt-1">
+				<div class="card_body m-2">
+					<h3 class="card-title">Title</h3>
+					<a type="button" class="btn btn-sm btn-outline-warning" href="#"><small>Project name</small></a>
+					<p class="card-text mb-1 mt-2">Some info about task</p>
+					<div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+						<a type="button" class="btn btn-secondary" href="#">Open</a>
+						<a type="button" class="btn btn-secondary" ref="#">Take</a>
+						<a type="button" class="btn btn-secondary" ref="#">Delete</a>
+					</div>
+					<div class="text-right">
+						<p class="card-text m-0 mt-2">03.08.19</p>
+						<p class="card-text">Username</p>
+					</div>
+				</div>
+			</div>
+			<!-- End Task -->
+		</div>
+	</div>
+	<!-- End Type -->
+	<!-- End ProjectTasks -->
+{% endblock %}
